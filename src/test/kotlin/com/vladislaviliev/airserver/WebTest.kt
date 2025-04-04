@@ -24,4 +24,40 @@ class WebTest {
             .andExpect(MockMvcResultMatchers.status().isOk)
             .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
     }
+
+    @Test
+    fun exposesSquare() {
+        mockMvc
+            .perform(MockMvcRequestBuilders.get("/square?lat=0.0&lng=0.0&side=10.0"))
+            .andExpect(MockMvcResultMatchers.status().isOk)
+            .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
+    }
+
+    @Test
+    fun square_fails_without_lat() {
+        mockMvc
+            .perform(MockMvcRequestBuilders.get("/square?lng=0.0&side=10.0"))
+            .andExpect(MockMvcResultMatchers.status().isBadRequest)
+    }
+
+    @Test
+    fun square_fails_without_lng() {
+        mockMvc
+            .perform(MockMvcRequestBuilders.get("/square?lat=0.0&side=10.0"))
+            .andExpect(MockMvcResultMatchers.status().isBadRequest)
+    }
+
+    @Test
+    fun square_fails_without_side() {
+        mockMvc
+            .perform(MockMvcRequestBuilders.get("/square?lat=0.0&lng=0.0"))
+            .andExpect(MockMvcResultMatchers.status().isBadRequest)
+    }
+
+    @Test
+    fun exposesPost() {
+        mockMvc
+            .perform(MockMvcRequestBuilders.post("").contentType(MediaType.APPLICATION_JSON).content("[]"))
+            .andExpect(MockMvcResultMatchers.status().isOk)
+    }
 }
