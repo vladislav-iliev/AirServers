@@ -10,10 +10,12 @@ import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import java.time.Instant
 
-@SpringBootTest
+@DataJpaTest
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 class DaoTest {
 
     @Autowired
@@ -38,7 +40,7 @@ class DaoTest {
 
     @Test
     @Transactional
-    fun testCount() {
+    fun testSquareCount() {
         val readings = dao.findReadings(0.0, 0.0, 10.0)
         Assertions.assertEquals(2, readings.count())
     }
