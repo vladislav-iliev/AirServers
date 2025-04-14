@@ -48,7 +48,7 @@ class Config {
             .clientSecret("some_client_secret")
             .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
             .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
-            .redirectUri("")
+            .redirectUri("https://www.motherfuckingwebsite.com")
             .scope(OidcScopes.OPENID)
             .build()
         return InMemoryRegisteredClientRepository(registeredClient)
