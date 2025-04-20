@@ -1,13 +1,13 @@
 package com.vladislaviliev.oauth.pkce
 
 import org.slf4j.LoggerFactory
+import org.springframework.security.crypto.keygen.KeyGenerators
 import java.security.MessageDigest
-import java.security.SecureRandom
 import java.util.*
 
 class PkceGen {
 
-    private fun genVerifier() = ByteArray(32).also { SecureRandom().nextBytes(it) }
+    private fun genVerifier() = KeyGenerators.secureRandom(32).generateKey()
 
     private fun genChallenge(verifier: ByteArray) = MessageDigest.getInstance("SHA-256").digest(verifier)
 
