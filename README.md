@@ -1,0 +1,1 @@
+Miniature collection of servers for NewAir. TODO: Link credentials from OAuth to Resources.
