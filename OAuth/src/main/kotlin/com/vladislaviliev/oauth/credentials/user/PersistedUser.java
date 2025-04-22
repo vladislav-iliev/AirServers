@@ -1,6 +1,7 @@
-package com.vladislaviliev.oauth.credentials;
+package com.vladislaviliev.oauth.credentials.user;
 
 import com.vladislaviliev.oauth.credentials.userAuthority.PersistedUserAuthority;
+import com.vladislaviliev.oauth.credentials.userAuthority.PersistedUserAuthorityId_;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -12,7 +13,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "User")
 
 @NoArgsConstructor
 @RequiredArgsConstructor
@@ -32,6 +32,11 @@ public class PersistedUser {
     @NotNull
     @Column(nullable = false)
     private String password;
+
+    @NonNull
+    @NotNull
+    @Column(nullable = false)
+    private Boolean enabled;
 
     @OneToMany
     @JoinColumn(name = PersistedUserAuthorityId_.USER_ID)
