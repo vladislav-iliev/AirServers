@@ -5,14 +5,18 @@ import com.nimbusds.jose.jwk.RSAKey
 import com.nimbusds.jose.jwk.source.ImmutableJWKSet
 import com.nimbusds.jose.jwk.source.JWKSource
 import com.nimbusds.jose.proc.SecurityContext
+import com.vladislaviliev.oauth.credentials.salt.Salt
+import com.vladislaviliev.oauth.credentials.salt.SaltDao
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.PropertySource
+import org.springframework.data.repository.findByIdOrNull
 import org.springframework.security.config.Customizer
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.core.userdetails.User
 import org.springframework.security.core.userdetails.UserDetailsService
-import org.springframework.security.crypto.password.NoOpPasswordEncoder
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
+import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.oauth2.core.AuthorizationGrantType
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod
 import org.springframework.security.oauth2.core.oidc.OidcScopes
@@ -24,6 +28,7 @@ import org.springframework.security.oauth2.server.authorization.settings.Authori
 import org.springframework.security.provisioning.InMemoryUserDetailsManager
 import org.springframework.security.web.SecurityFilterChain
 import java.security.KeyPairGenerator
+import java.security.SecureRandom
 import java.security.interfaces.RSAPrivateKey
 import java.security.interfaces.RSAPublicKey
 import java.util.*
@@ -39,7 +44,10 @@ class Config {
     }
 
     @Bean
-    fun passwordEncoder() = NoOpPasswordEncoder.getInstance()
+    fun passwordEncoder(saltDao: SaltDao): PasswordEncoder {
+        val salt = saltDao.findByIdOrNull(Salt.USER_PASSWORD)!!
+        return BCryptPasswordEncoder(4, SecureRandom(salt.valuation.toByteArray()))
+    }
 
     @Bean
     fun registeredClientRepository(): RegisteredClientRepository {
