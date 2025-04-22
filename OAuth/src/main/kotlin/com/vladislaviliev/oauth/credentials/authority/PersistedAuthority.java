@@ -1,4 +1,4 @@
-package com.vladislaviliev.oauth.credentials;
+package com.vladislaviliev.oauth.credentials.authority;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -8,7 +8,6 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 @Entity
-@Table(name = "Authority")
 
 @NoArgsConstructor
 @RequiredArgsConstructor
