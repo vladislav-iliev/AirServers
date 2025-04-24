@@ -1,4 +1,4 @@
-package com.vladislaviliev.oauth.credentials.salt;
+package com.vladislaviliev.airservers.oauth.credentials.salt;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

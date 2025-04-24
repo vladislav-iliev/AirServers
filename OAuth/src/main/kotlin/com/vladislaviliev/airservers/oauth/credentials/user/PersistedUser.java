@@ -1,7 +1,7 @@
-package com.vladislaviliev.oauth.credentials.user;
+package com.vladislaviliev.airservers.oauth.credentials.user;
 
-import com.vladislaviliev.oauth.credentials.userAuthority.PersistedUserAuthority;
-import com.vladislaviliev.oauth.credentials.userAuthority.PersistedUserAuthorityId_;
+import com.vladislaviliev.airservers.oauth.credentials.userAuthority.PersistedUserAuthority;
+import com.vladislaviliev.airservers.oauth.credentials.userAuthority.PersistedUserAuthorityId_;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;

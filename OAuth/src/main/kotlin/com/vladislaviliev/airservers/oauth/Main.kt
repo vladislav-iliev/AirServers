@@ -1,4 +1,4 @@
-package com.vladislaviliev.oauth
+package com.vladislaviliev.airservers.oauth
 
 import org.springframework.boot.runApplication
 

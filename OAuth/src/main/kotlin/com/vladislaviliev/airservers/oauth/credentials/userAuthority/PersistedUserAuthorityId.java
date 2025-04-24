@@ -1,4 +1,4 @@
-package com.vladislaviliev.oauth.credentials.userAuthority;
+package com.vladislaviliev.airservers.oauth.credentials.userAuthority;
 
 import jakarta.persistence.Embeddable;
 import jakarta.validation.constraints.NotNull;

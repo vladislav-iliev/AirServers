@@ -1,6 +1,6 @@
-package com.vladislaviliev.oauth.credentials.userAuthority;
+package com.vladislaviliev.airservers.oauth.credentials.userAuthority;
 
-import com.vladislaviliev.oauth.credentials.authority.PersistedAuthority;
+import com.vladislaviliev.airservers.oauth.credentials.authority.PersistedAuthority;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;

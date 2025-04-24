@@ -1,4 +1,4 @@
-package com.vladislaviliev.oauth.credentials.authority
+package com.vladislaviliev.airservers.oauth.credentials.authority
 
 import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Repository

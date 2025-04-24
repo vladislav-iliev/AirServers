@@ -1,4 +1,4 @@
-package com.vladislaviliev.oauth.pkce
+package com.vladislaviliev.airservers.oauth.pkce
 
 import org.slf4j.LoggerFactory
 import org.springframework.security.crypto.keygen.KeyGenerators

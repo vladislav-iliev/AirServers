@@ -1,12 +1,12 @@
-package com.vladislaviliev.oauth
+package com.vladislaviliev.airservers.oauth
 
 import com.nimbusds.jose.jwk.JWKSet
 import com.nimbusds.jose.jwk.RSAKey
 import com.nimbusds.jose.jwk.source.ImmutableJWKSet
 import com.nimbusds.jose.jwk.source.JWKSource
 import com.nimbusds.jose.proc.SecurityContext
-import com.vladislaviliev.oauth.credentials.salt.Salt
-import com.vladislaviliev.oauth.credentials.salt.SaltDao
+import com.vladislaviliev.airservers.oauth.credentials.salt.Salt
+import com.vladislaviliev.airservers.oauth.credentials.salt.SaltDao
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.PropertySource

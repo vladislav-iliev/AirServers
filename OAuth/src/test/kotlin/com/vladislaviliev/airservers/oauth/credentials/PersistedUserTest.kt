@@ -1,12 +1,12 @@
-package com.vladislaviliev.oauth.credentials
+package com.vladislaviliev.airservers.oauth.credentials
 
-import com.vladislaviliev.oauth.credentials.authority.AuthorityDao
-import com.vladislaviliev.oauth.credentials.authority.PersistedAuthority
-import com.vladislaviliev.oauth.credentials.user.PersistedUser
-import com.vladislaviliev.oauth.credentials.user.UserDao
-import com.vladislaviliev.oauth.credentials.userAuthority.PersistedUserAuthority
-import com.vladislaviliev.oauth.credentials.userAuthority.PersistedUserAuthorityId
-import com.vladislaviliev.oauth.credentials.userAuthority.UserAuthorityDao
+import com.vladislaviliev.airservers.oauth.credentials.authority.AuthorityDao
+import com.vladislaviliev.airservers.oauth.credentials.authority.PersistedAuthority
+import com.vladislaviliev.airservers.oauth.credentials.user.PersistedUser
+import com.vladislaviliev.airservers.oauth.credentials.user.UserDao
+import com.vladislaviliev.airservers.oauth.credentials.userAuthority.PersistedUserAuthority
+import com.vladislaviliev.airservers.oauth.credentials.userAuthority.PersistedUserAuthorityId
+import com.vladislaviliev.airservers.oauth.credentials.userAuthority.UserAuthorityDao
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -16,7 +16,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 
 @DataJpaTest
 @AutoConfigureTestDatabase
-@EntityScan("com.vladislaviliev.oauth.credentials")
+@EntityScan("com.vladislaviliev.airservers.oauth.credentials")
 class PersistedUserTest @Autowired constructor(
     val userDao: UserDao,
     val authorityDao: AuthorityDao,

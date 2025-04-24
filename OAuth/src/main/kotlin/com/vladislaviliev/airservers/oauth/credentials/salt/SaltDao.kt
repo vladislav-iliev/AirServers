@@ -1,4 +1,4 @@
-package com.vladislaviliev.oauth.credentials.salt
+package com.vladislaviliev.airservers.oauth.credentials.salt
 
 import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Repository
