@@ -1,0 +1,5 @@
+FROM $(ARG_JAVA_VER)
+COPY BOOT-INF/lib /app/lib
+COPY META-INF /app/META-INF
+COPY BOOT-INF/classes /app
+ENTRYPOINT ["java","-cp","app:app/lib/*","$(ARG_MAIN_CLASS)"]
