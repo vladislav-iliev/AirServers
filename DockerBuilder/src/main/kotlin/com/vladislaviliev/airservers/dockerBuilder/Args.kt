@@ -5,7 +5,7 @@ class Args(args: Array<String>) {
     private val prefixSubproject = "--subproject="
     private val prefixJavaLayer = "--javaLayerTag="
 
-    private val defaultJavaLayer = "openjdk:21"
+    private val defaultJavaLayer = "eclipse-temurin:24.0.1_9-jre"
 
     private val map = readArgs(args)
     val subproject by map
