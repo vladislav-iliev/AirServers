@@ -27,12 +27,12 @@ class Args(args: Array<String>) {
         "Everything else goes to 'docker build'"
     ).joinToString("\n")
 
-    private fun readArgs(args: Array<String>): MutableMap<String, String> {
-        val argSubProjectName = getArgOrNull(prefixSubproject, args) ?: throw IllegalArgumentException(info())
+    private fun readArgs(args: Array<String>): Map<String, String> {
+        val argSubproject = getArgOrNull(prefixSubproject, args) ?: throw IllegalArgumentException(info())
         val argJavaLayerTag = getArgOrNull(prefixJavaLayer, args) ?: defaultJavaLayer
         val dockerBuildArgs = getFloatingArgs(args)
-        return mutableMapOf(
-            ::subproject.name to argSubProjectName,
+        return mapOf(
+            ::subproject.name to argSubproject,
             ::javaTag.name to argJavaLayerTag,
             ::dockerBuildArgs.name to dockerBuildArgs
         )

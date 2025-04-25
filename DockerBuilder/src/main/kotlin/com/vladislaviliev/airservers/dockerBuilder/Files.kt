@@ -28,8 +28,8 @@ class Files(subprojectName: String) {
         ?: throw IllegalStateException("Can't find jar in ${buildPath.pathString}")
 
     fun extractJar() {
-        val jar = JarFile(getJarPath().toFile())
-        jar.use { jar ->
+        val jarFile = JarFile(getJarPath().toFile())
+        jarFile.use { jar ->
             jar.entries().asSequence().filter { !it.isDirectory }.forEach { entry ->
                 jar.getInputStream(entry).use { entryInStream ->
                     val filePath = extractedJarPath.resolve(entry.name)
