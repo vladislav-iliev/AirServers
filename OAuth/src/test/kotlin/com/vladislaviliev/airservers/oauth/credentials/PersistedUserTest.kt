@@ -24,7 +24,7 @@ class PersistedUserTest @Autowired constructor(
 ) {
     @Test
     fun userLoadsAuthorities() {
-        var u = PersistedUser("vlady", "vlady", true)
+        var u = PersistedUser("vlady", "vlady")
         u = userDao.save(u)
 
         var a = PersistedAuthority("read")

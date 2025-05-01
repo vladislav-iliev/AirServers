@@ -19,6 +19,6 @@ public class PersistedAuthority {
 
     @NonNull
     @NotNull
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String name;
 }

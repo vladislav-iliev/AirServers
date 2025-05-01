@@ -1,21 +1,17 @@
 package com.vladislaviliev.airservers.oauth.credentials.user;
 
-import com.vladislaviliev.airservers.oauth.credentials.userAuthority.PersistedUserAuthority;
-import com.vladislaviliev.airservers.oauth.credentials.userAuthority.PersistedUserAuthorityId_;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
-
-import java.util.HashSet;
-import java.util.Set;
+import lombok.*;
 
 @Entity
 
 @NoArgsConstructor
 @RequiredArgsConstructor
+@AllArgsConstructor
 @Getter
 public class PersistedUser {
 
@@ -25,20 +21,11 @@ public class PersistedUser {
 
     @NonNull
     @NotNull
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String username;
 
     @NonNull
     @NotNull
     @Column(nullable = false)
     private String password;
-
-    @NonNull
-    @NotNull
-    @Column(nullable = false)
-    private Boolean enabled;
-
-    @OneToMany
-    @JoinColumn(name = PersistedUserAuthorityId_.USER_ID)
-    private final Set<PersistedUserAuthority> authorities = new HashSet<>();
 }

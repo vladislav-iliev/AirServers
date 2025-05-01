@@ -5,16 +5,18 @@ import com.nimbusds.jose.jwk.RSAKey
 import com.nimbusds.jose.jwk.source.ImmutableJWKSet
 import com.nimbusds.jose.jwk.source.JWKSource
 import com.nimbusds.jose.proc.SecurityContext
+import com.vladislaviliev.airservers.oauth.credentials.authority.AuthorityDao
 import com.vladislaviliev.airservers.oauth.credentials.salt.Salt
 import com.vladislaviliev.airservers.oauth.credentials.salt.SaltDao
+import com.vladislaviliev.airservers.oauth.credentials.user.UserDao
+import com.vladislaviliev.airservers.oauth.credentials.userAuthority.UserAuthorityDao
+import com.vladislaviliev.airservers.oauth.userManager.UserManager
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.PropertySource
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.security.config.Customizer
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
-import org.springframework.security.core.userdetails.User
-import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.oauth2.core.AuthorizationGrantType
@@ -25,7 +27,6 @@ import org.springframework.security.oauth2.server.authorization.client.Registere
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer
 import org.springframework.security.oauth2.server.authorization.settings.AuthorizationServerSettings
-import org.springframework.security.provisioning.InMemoryUserDetailsManager
 import org.springframework.security.web.SecurityFilterChain
 import java.security.KeyPairGenerator
 import java.security.SecureRandom
@@ -38,15 +39,20 @@ import java.util.*
 class Config {
 
     @Bean
-    fun userDetailsService(): UserDetailsService {
-        val userDetails = User.withUsername("some_user").password("some_user").roles("USER").build()
-        return InMemoryUserDetailsManager(userDetails)
-    }
+    fun userDetailsManager(
+        userDao: UserDao,
+        authorityDao: AuthorityDao,
+        userAuthorityDao: UserAuthorityDao,
+    ) = UserManager(userDao, authorityDao, userAuthorityDao)
 
     @Bean
     fun passwordEncoder(saltDao: SaltDao): PasswordEncoder {
-        val salt = saltDao.findByIdOrNull(Salt.USER_PASSWORD)!!
-        return BCryptPasswordEncoder(4, SecureRandom(salt.valuation.toByteArray()))
+        val salt = saltDao.findByIdOrNull(Salt.USER_PASSWORD)
+        val strength = 4
+        return if (salt == null)
+            BCryptPasswordEncoder(strength)
+        else
+            BCryptPasswordEncoder(strength, SecureRandom(salt.valuation.toByteArray()))
     }
 
     @Bean

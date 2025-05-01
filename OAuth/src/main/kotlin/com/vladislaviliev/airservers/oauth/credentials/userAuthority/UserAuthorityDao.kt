@@ -4,4 +4,6 @@ import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface UserAuthorityDao : CrudRepository<PersistedUserAuthority, Long>
+interface UserAuthorityDao : CrudRepository<PersistedUserAuthority, PersistedUserAuthorityId> {
+    fun findByIdUserId(userId: Long): Collection<PersistedUserAuthority>
+}

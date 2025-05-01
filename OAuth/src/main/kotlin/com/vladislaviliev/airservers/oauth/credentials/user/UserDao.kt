@@ -4,4 +4,8 @@ import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface UserDao : CrudRepository<PersistedUser, Long>
+interface UserDao : CrudRepository<PersistedUser, Long> {
+    fun findByUsername(username: String): PersistedUser
+    fun existsByUsername(username: String): Boolean
+    fun deleteByUsername(username: String)
+}
