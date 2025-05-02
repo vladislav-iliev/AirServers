@@ -37,15 +37,14 @@ class UserManager(
         val newAuths = user.authorities.map { authorityDao.findByName(it.authority) }
         val savedAuths = userAuthorityDao.findByIdUserId(savedU.id).map { it.authority }
 
-        val toAdd = newAuths.minus(savedAuths).map {
-            PersistedUserAuthority(PersistedUserAuthorityId(savedU.id, it.id))
-        }
-        userAuthorityDao.saveAll(toAdd)
+        val toAdd = newAuths - savedAuths
+        val intersecting = savedAuths.intersect(newAuths)
+        val toRemove = savedAuths - intersecting
 
-        val toRemove = savedAuths.minus(newAuths).map {
-            PersistedUserAuthorityId(savedU.id, it.id)
-        }
-        userAuthorityDao.deleteAllById(toRemove)
+        userAuthorityDao.saveAll(toAdd.map {
+            PersistedUserAuthority(PersistedUserAuthorityId(savedU.id, it.id))
+        })
+        userAuthorityDao.deleteAllById(toRemove.map { PersistedUserAuthorityId(savedU.id, it.id) })
     }
 
     override fun deleteUser(username: String) {

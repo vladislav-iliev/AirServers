@@ -2,16 +2,14 @@ package com.vladislaviliev.airservers.oauth.credentials.authority;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 @Entity
 
 @NoArgsConstructor
 @RequiredArgsConstructor
 @Getter
+@EqualsAndHashCode
 public class PersistedAuthority {
     @Id
     @GeneratedValue

@@ -42,20 +42,27 @@ class UserManagerTest @Autowired constructor(
 
     @Test
     fun testUpdateUser() {
-        addAuthority("test_authority")
-        val u = User.withUsername("test_user").password("test_password").authorities("test_authority").build()
+
+        addAuthority("test_authority0", "test_authority1", "test_authority2")
+        val u = User
+            .withUsername("test_user")
+            .password("test_password")
+            .authorities("test_authority0", "test_authority1")
+            .build()
         userDetailsManager.createUser(u)
 
-        addAuthority("new_test_authority")
-        val newDetails =
-            User.withUsername("test_user").password("new_test_password").authorities("new_test_authority").build()
+        val newDetails = User
+            .withUsername("test_user")
+            .password("new_test_password")
+            .authorities("test_authority1", "test_authority2")
+            .build()
         userDetailsManager.updateUser(newDetails)
 
         val loadedU = userDao.findByUsername("test_user")
         Assertions.assertEquals(newDetails.password, loadedU.password)
 
         val auths = userAuthorityDao.findByIdUserId(loadedU.id).map { it.authority.name }
-        Assertions.assertEquals(1, auths.count())
-        Assertions.assertEquals("new_test_authority", auths.first())
+        Assertions.assertEquals(2, auths.count())
+        Assertions.assertEquals(auths, listOf("test_authority1", "test_authority2"))
     }
 }
