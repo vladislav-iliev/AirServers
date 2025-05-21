@@ -1,7 +1,7 @@
 # AirServers
 
 ## Overview
-Miniature collection of servers for NewAir. TODO: Link credentials from OAuth to Resources.
+Miniature collection of servers for NewAir - OAuth for authentication, Resource for air data.
 
 ## Docker
 Build a docker image for a project using DockerBuilder/dockerbuilder.java
